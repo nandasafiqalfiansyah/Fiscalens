@@ -54,31 +54,38 @@ export const Layout: React.FC<LayoutProps> = ({ children, activeTab, onTabChange
           </button>
         </div>
 
-        <nav className="flex-1 p-6 space-y-2 overflow-y-auto">
+        <nav className={cn("flex-1 space-y-2 overflow-y-auto transition-all", isOpen ? "p-6" : "p-4")}>
           <p className={cn("text-[9px] uppercase tracking-[0.2em] text-white/20 mb-4 px-2", !isOpen && "hidden")}>Main Intelligence</p>
           {navItems.map((item) => (
             <button
               key={item.name}
               onClick={() => onTabChange(item.name)}
               className={cn(
-                "w-full flex items-center gap-4 p-3 transition-all group rounded-sm text-left",
+                "w-full flex items-center transition-all group rounded-sm shrink-0",
+                isOpen ? "gap-4 p-3 text-left" : "justify-center p-4",
                 activeTab === item.name 
                   ? "bg-white/5 text-white font-medium border-l border-amber-500" 
                   : "text-white/40 hover:text-white hover:bg-white/5"
               )}
+              title={!isOpen ? item.name : undefined}
             >
-              <item.icon size={18} className={cn(activeTab === item.name ? "text-amber-500" : "text-white/20 group-hover:text-white/60")} />
-              <span className={cn("text-xs uppercase tracking-widest whitespace-nowrap transition-opacity", !isOpen && "opacity-0 pointer-events-none")}>
-                {item.name}
-              </span>
+              <item.icon size={18} className={cn("shrink-0", activeTab === item.name ? "text-amber-500" : "text-white/20 group-hover:text-white/60")} />
+              {isOpen && (
+                <span className="text-xs uppercase tracking-widest whitespace-nowrap transition-opacity">
+                  {item.name}
+                </span>
+              )}
             </button>
           ))}
         </nav>
 
-        <div className="p-6 border-t border-white/5 mt-auto space-y-1">
-          <button className="w-full flex items-center gap-4 p-3 text-white/40 hover:text-white hover:bg-white/5 rounded-sm transition-colors text-left font-medium">
-            <Settings size={18} />
-            <span className={cn("text-[10px] uppercase tracking-widest transition-opacity", !isOpen && "opacity-0")}>System Config</span>
+        <div className={cn("border-t border-white/5 mt-auto space-y-1 transition-all", isOpen ? "p-6" : "p-4 flex justify-center")}>
+          <button className={cn(
+            "flex items-center text-white/40 hover:text-white hover:bg-white/5 rounded-sm transition-colors font-medium",
+            isOpen ? "w-full gap-4 p-3 text-left" : "p-4 justify-center"
+          )}>
+            <Settings size={18} className="shrink-0" />
+            {isOpen && <span className="text-[10px] uppercase tracking-widest">System Config</span>}
           </button>
         </div>
       </aside>
