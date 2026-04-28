@@ -42,9 +42,14 @@ export const InsightsPanel: React.FC<InsightsPanelProps> = ({ insights, isLoadin
             >
               {insights.split('\n').filter(l => l.trim()).map((line, i) => (
                 <div key={i} className="flex gap-4 group">
-                  <div className="mt-1 w-1 h-3 bg-amber-500/30 group-hover:bg-amber-500 transition-colors" />
+                  <div className="mt-1 w-1 h-3 bg-amber-500/30 group-hover:bg-amber-500 transition-colors shrink-0" />
                   <p className="text-xs leading-relaxed text-white/60">
-                    {line.replace(/^[- \d.]*/, '')}
+                    {line.split(/(\*\*.*?\*\*)/).map((part, index) => {
+                      if (part.startsWith('**') && part.endsWith('**')) {
+                        return <strong key={index} className="text-white font-bold">{part.slice(2, -2)}</strong>;
+                      }
+                      return part;
+                    })}
                   </p>
                 </div>
               ))}
