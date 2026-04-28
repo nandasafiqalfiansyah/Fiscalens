@@ -11,17 +11,45 @@ export interface FiscalData {
   purchasingPower: number;
   budgetAllocated: number; // in Billion IDR
   budgetEffectiveness: number; // calculated score
+  infrastructureSpend: number;
+  socialProtection: number;
+  digitalVelocity: number;
+  consumerConfidence: number;
 }
 
 // Mock/Static Fallback Data because BPS API requires an individual API Key (key)
 // In a real app, users would provide their key in the settings/env.
 const FALLBACK_DATA: FiscalData[] = [
-  { year: 2023, month: 'Jan', inflation: 5.28, msmeGrowth: 4.2, purchasingPower: 4.8, budgetAllocated: 12000, budgetEffectiveness: 72 },
-  { year: 2023, month: 'Feb', inflation: 5.47, msmeGrowth: 4.5, purchasingPower: 4.7, budgetAllocated: 13500, budgetEffectiveness: 74 },
-  { year: 2023, month: 'Mar', inflation: 4.97, msmeGrowth: 4.8, purchasingPower: 5.1, budgetAllocated: 15000, budgetEffectiveness: 78 },
-  { year: 2023, month: 'Apr', inflation: 4.33, msmeGrowth: 5.1, purchasingPower: 5.3, budgetAllocated: 18000, budgetEffectiveness: 82 },
-  { year: 2023, month: 'May', inflation: 4.00, msmeGrowth: 5.4, purchasingPower: 5.5, budgetAllocated: 21000, budgetEffectiveness: 85 },
-  { year: 2023, month: 'Jun', inflation: 3.52, msmeGrowth: 5.2, purchasingPower: 5.4, budgetAllocated: 19000, budgetEffectiveness: 84 },
+  { 
+    year: 2023, month: 'Jan', inflation: 5.28, msmeGrowth: 4.2, purchasingPower: 4.8, 
+    budgetAllocated: 12000, budgetEffectiveness: 72, infrastructureSpend: 4500, socialProtection: 3200,
+    digitalVelocity: 68, consumerConfidence: 102.4
+  },
+  { 
+    year: 2023, month: 'Feb', inflation: 5.47, msmeGrowth: 4.5, purchasingPower: 4.7, 
+    budgetAllocated: 13500, budgetEffectiveness: 74, infrastructureSpend: 4800, socialProtection: 3500,
+    digitalVelocity: 70, consumerConfidence: 101.8
+  },
+  { 
+    year: 2023, month: 'Mar', inflation: 4.97, msmeGrowth: 4.8, purchasingPower: 5.1, 
+    budgetAllocated: 15000, budgetEffectiveness: 78, infrastructureSpend: 5200, socialProtection: 3800,
+    digitalVelocity: 73, consumerConfidence: 104.5
+  },
+  { 
+    year: 2023, month: 'Apr', inflation: 4.33, msmeGrowth: 5.1, purchasingPower: 5.3, 
+    budgetAllocated: 18000, budgetEffectiveness: 82, infrastructureSpend: 6100, socialProtection: 4200,
+    digitalVelocity: 76, consumerConfidence: 106.2
+  },
+  { 
+    year: 2023, month: 'May', inflation: 4.00, msmeGrowth: 5.4, purchasingPower: 5.5, 
+    budgetAllocated: 21000, budgetEffectiveness: 85, infrastructureSpend: 7500, socialProtection: 4800,
+    digitalVelocity: 80, consumerConfidence: 108.5
+  },
+  { 
+    year: 2023, month: 'Jun', inflation: 3.52, msmeGrowth: 5.2, purchasingPower: 5.4, 
+    budgetAllocated: 19000, budgetEffectiveness: 84, infrastructureSpend: 6800, socialProtection: 4500,
+    digitalVelocity: 79, consumerConfidence: 107.8
+  },
 ];
 
 export async function fetchFiscalIndicators(): Promise<FiscalData[]> {

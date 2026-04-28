@@ -29,6 +29,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, activeTab, onTabChange
     { name: 'Daerah (APBD)', icon: Map },
     { name: 'UMKM & Retail', icon: ShoppingBag },
     { name: 'Daya Beli (CPI)', icon: PieChart },
+    { name: 'Geospatial Intel', icon: Map },
     { name: 'Executive Summary', icon: Sparkles },
   ];
 

@@ -21,14 +21,20 @@ export async function generateFiscalInsights(data: FiscalData[]) {
     - Daya Beli: ${latestData.purchasingPower}%
     - Anggaran Dialokasikan: Rp ${latestData.budgetAllocated} Miliar
     - Skor Efektivitas: ${latestData.budgetEffectiveness}
+    - Belanja Infrastruktur: Rp ${latestData.infrastructureSpend} Miliar
+    - Perlindungan Sosial: Rp ${latestData.socialProtection} Miliar
+    - Kecepatan Ekonomi Digital: ${latestData.digitalVelocity}%
+    - Indeks Keyakinan Konsumen (CCI): ${latestData.consumerConfidence}
     
-    Data Sebelumnya:
+    Data Sebelumnya (${previousData.month} ${previousData.year}):
     - Skor Efektivitas: ${previousData.budgetEffectiveness}
+    - Kecepatan Digital: ${previousData.digitalVelocity}%
     
-    Berikan analisis singkat (maks 3 poin) mengenai:
-    1. Hubungan antara belanja pemerintah dan gairah UMKM.
-    2. Dampak inflasi terhadap daya beli masyarakat saat ini.
-    3. Rekomendasi strategis untuk efisiensi anggaran periode berikutnya.
+    Berikan analisis mendalam (minimal 4 poin detail) mengenai:
+    1. Korelasi antara belanja infrastruktur dan perlindungan sosial terhadap daya beli.
+    2. Analisis akselerasi ekonomi digital pasca stimulus fiskal.
+    3. Pergerakan Indeks Keyakinan Konsumen di tengah fluktuasi inflasi.
+    4. **Rekomendasi Efisiensi Anggaran:** Terfokus pada alokasi sektoral yang paling berdampak.
     
     Gunakan bahasa Indonesia yang profesional dan lugas.
   `;

@@ -13,6 +13,7 @@ import { Layout } from './components/Layout';
 import { KPICard } from './components/KPICard';
 import { DashboardCharts } from './components/DashboardCharts';
 import { InsightsPanel } from './components/InsightsPanel';
+import { GeospatialView } from './components/GeospatialView';
 import { 
   fetchFiscalIndicators, 
   FiscalData 
@@ -63,7 +64,11 @@ export default function App() {
     msmeGrowth: 0,
     purchasingPower: 0,
     budgetAllocated: 0,
-    budgetEffectiveness: 0
+    budgetEffectiveness: 0,
+    infrastructureSpend: 0,
+    socialProtection: 0,
+    digitalVelocity: 0,
+    consumerConfidence: 0
   };
 
   const dashboardMetrics = [
@@ -75,22 +80,22 @@ export default function App() {
       color: 'blue' as const 
     },
     { 
-      title: 'Pertumbuhan UMKM', 
-      value: formatPercent(latest.msmeGrowth), 
-      change: 12.5, 
+      title: 'Digital Economy Velocity', 
+      value: `${latest.digitalVelocity}%`, 
+      change: 15.4, 
       icon: TrendingUp, 
       color: 'green' as const 
     },
     { 
-      title: 'Tingkat Inflasi (CPI)', 
-      value: `${latest.inflation}%`, 
-      change: -2.1, 
+      title: 'Consumer Confidence', 
+      value: latest.consumerConfidence.toFixed(1), 
+      change: 1.2, 
       icon: ArrowDownCircle, 
       color: 'amber' as const 
     },
     { 
-      title: 'Alokasi Real-time', 
-      value: formatIDR(latest.budgetAllocated * 1000000000), 
+      title: 'Total Alokasi (B)', 
+      value: formatIDR(latest.budgetAllocated * 1000000000).replace('Rp', 'IDR'), 
       change: 4.3, 
       icon: Coins, 
       color: 'blue' as const 
@@ -110,8 +115,8 @@ export default function App() {
                   </div>
                   <p className="text-[10px] text-white/30 tracking-widest mt-4 uppercase">Status: <span className="text-emerald-500 font-black">SYNCED</span></p>
                 </div>
-                <div className="pt-8 border-t border-white/5 text-[11px] leading-relaxed text-white/40 italic font-serif">
-                   Live telemetry from {tableTitle.toLowerCase()} endpoints verified.
+                <div className="pt-8 border-t border-white/5 text-[11px] leading-relaxed text-white/40 italic font-serif text-justify">
+                   Detailed telemetric validation from global fiscal endpoints indicates a stable {title.toLowerCase()} progression.
                 </div>
              </div>
           </div>
@@ -140,18 +145,29 @@ export default function App() {
                     <thead className="bg-white/5 text-white/30 uppercase tracking-[0.2em] border-b border-white/5">
                       <tr>
                         <th className="px-8 py-4 font-bold">Timeline</th>
-                        <th className="px-8 py-4 font-bold text-right">Indicator A</th>
-                        <th className="px-8 py-4 font-bold text-right">Indicator B</th>
-                        <th className="px-8 py-4 font-bold text-right">Load</th>
-                        <th className="px-8 py-4 font-bold text-right">Impact</th>
+                        <th className="px-8 py-4 font-bold text-right">Inf/MSME</th>
+                        <th className="px-8 py-4 font-bold text-right">Infra/Soc</th>
+                        <th className="px-8 py-4 font-bold text-right">Digital/CCI</th>
+                        <th className="px-8 py-4 font-bold text-right">Budget</th>
+                        <th className="px-8 py-4 font-bold text-right">Score</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-white/5 font-mono">
                       {chartData.map((row, idx) => (
                         <tr key={idx} className="hover:bg-white/[0.03] transition-colors group">
-                          <td className="px-8 py-5 text-white font-serif italic text-base">{row.month} 2023</td>
-                          <td className="px-8 py-5 text-right text-amber-500 font-bold">{row.inflation}%</td>
-                          <td className="px-8 py-5 text-right text-emerald-500 font-bold">{row.msmeGrowth}%</td>
+                          <td className="px-8 py-5 text-white font-serif italic text-base whitespace-nowrap">{row.month} 2023</td>
+                          <td className="px-8 py-5 text-right">
+                            <span className="text-amber-500 block">{row.inflation}%</span>
+                            <span className="text-emerald-500">{row.msmeGrowth}%</span>
+                          </td>
+                          <td className="px-8 py-5 text-right">
+                             <span className="text-blue-500 block">{row.infrastructureSpend}M</span>
+                             <span className="text-purple-500">{row.socialProtection}M</span>
+                          </td>
+                          <td className="px-8 py-5 text-right">
+                             <span className="text-white block">{row.digitalVelocity}%</span>
+                             <span className="text-white/40">{row.consumerConfidence}</span>
+                          </td>
                           <td className="px-8 py-5 text-right text-white/40">{row.budgetAllocated} M</td>
                           <td className="px-8 py-5 text-right text-white font-black">{row.budgetEffectiveness}</td>
                         </tr>
@@ -183,6 +199,8 @@ export default function App() {
         return commonLayout('Growth', [dashboardMetrics[1], dashboardMetrics[3]], data, 'MSME Velocity Indices');
       case 'Daya Beli (CPI)':
         return commonLayout('Consumer', [dashboardMetrics[2], dashboardMetrics[1]], data, 'Consumer Price Index Streams');
+      case 'Geospatial Intel':
+        return <GeospatialView />;
       case 'Executive Summary':
         return (
           <div className="space-y-10">
