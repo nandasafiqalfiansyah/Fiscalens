@@ -40,11 +40,16 @@ export const Layout: React.FC<LayoutProps> = ({ children, activeTab, onTabChange
         "bg-[#111] border-r border-white/5 transition-all duration-300 flex flex-col z-20 shrink-0",
         isOpen ? "w-64" : "w-20"
       )}>
-        <div className="p-8 flex items-center justify-between border-b border-white/5">
-          <div className={cn("flex items-center gap-3 transition-opacity", !isOpen && "opacity-0")}>
-            <span className="font-serif italic text-2xl tracking-tight text-white">FISCALENS</span>
-          </div>
-          <button onClick={() => setIsOpen(!isOpen)} className="p-2 hover:bg-white/5 rounded-sm text-white/30">
+        <div className={cn(
+          "h-24 flex items-center border-b border-white/5 transition-all",
+          isOpen ? "px-8 justify-between" : "justify-center"
+        )}>
+          {isOpen && (
+            <div className="flex items-center gap-3 transition-opacity">
+              <span className="font-serif italic text-2xl tracking-tight text-white">FISCALENS</span>
+            </div>
+          )}
+          <button onClick={() => setIsOpen(!isOpen)} className="p-3 hover:bg-white/5 rounded-sm text-white/30">
             {isOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
