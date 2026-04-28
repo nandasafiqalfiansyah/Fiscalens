@@ -287,6 +287,62 @@ export default function App() {
             </div>
           </div>
         );
+      case 'Source & Legal':
+        return (
+          <div className="max-w-4xl mx-auto space-y-12 py-10">
+            <div className="border-b border-white/10 pb-8">
+               <h2 className="text-3xl font-serif italic text-white mb-4">Data Source & Legal Transmission</h2>
+               <p className="text-xs text-white/30 uppercase tracking-[0.2em]">System Version: 1.0.4 // Fiscal Intelligence Division</p>
+            </div>
+
+            <section className="space-y-6">
+              <h3 className="text-[10px] font-black text-amber-500 uppercase tracking-[0.3em]">Operational Endpoints</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                 {[
+                   { name: 'BPS (Badan Pusat Statistik)', type: 'API_V1_REST', desc: 'Indikator Inflasi dan Pertumbuhan Ekonomi makro bulanan.' },
+                   { name: 'Kemenkeu Open Data', type: 'DATASET_CKAN', desc: 'Distribusi Anggaran APBN/APBD dan realisasi belanja sektoral.' },
+                   { name: 'BI Monetary Node', type: 'RTGS_SIGNAL', desc: 'Informasi suku bunga dan stabilitas moneter regional.' },
+                   { name: 'FISCALENS Neural Engine', type: 'AI_SYNTHESIS', desc: 'Prosesing regresi data menggunakan Gemini SDK.' },
+                 ].map((source) => (
+                   <div key={source.name} className="p-6 bg-[#111] border border-white/5 rounded-sm group hover:bg-white/[0.03] transition-colors">
+                      <div className="flex justify-between items-start mb-2">
+                         <h4 className="text-xs font-bold text-white">{source.name}</h4>
+                         <span className="text-[8px] font-mono text-white/20 bg-white/5 px-2 py-0.5">{source.type}</span>
+                      </div>
+                      <p className="text-[11px] text-white/40 leading-relaxed font-serif italic">{source.desc}</p>
+                   </div>
+                 ))}
+              </div>
+            </section>
+
+            <section className="space-y-6">
+              <h3 className="text-[10px] font-black text-amber-500 uppercase tracking-[0.3em]">Normalisation Methodology</h3>
+              <div className="p-8 bg-[#111] border border-white/5 rounded-sm font-mono text-[10px] text-white/40 leading-loose">
+                 <p className="mb-4">// All data points are normalized using the following weight matrix:</p>
+                 <p className="text-emerald-500/80">W_FISC = (Budget_Allocated * Impact_Multiplier) / Inflation_Weight</p>
+                 <p className="mt-4">Sistem melakukan rekonsiliasi data setiap 30 detik untuk memastikan aliran informasi antara kementerian dan indikator pasar tetap sinkron. AI Strategic Synthesis melakukan regresi linier untuk menemuan pola anomali dalam efisiensi anggaran.</p>
+              </div>
+            </section>
+
+            <section className="space-y-6">
+              <h3 className="text-[10px] font-black text-amber-500 uppercase tracking-[0.3em]">Copyright & Intellectual Property</h3>
+              <div className="space-y-4 text-xs text-white/30 leading-relaxed text-justify px-2">
+                 <p>
+                    FISCALENS ANALYTICS merupakan piranti lunak berlisensi **Proprietary**. Seluruh algoritma visualisasi, 
+                    3D-Projected Mapping, dan mesin AI Synthesis adalah milik eksklusif **FISCALENS Intel Division Control**.
+                 </p>
+                 <p>
+                    Data yang ditampilkan bersumber dari data publik yang telah dioleh kembali (reprocessed). Penggunaan 
+                    data oleh pihak ketiga wajib menyertakan atribusi sumber data asli (BPS/Kemenkeu) dan link rujukan 
+                    ke platform FISCALENS.
+                 </p>
+                 <p className="pt-4 border-t border-white/5 text-[9px] uppercase tracking-widest text-white/10">
+                    © 2024 FISCALENS ANALYTICS. ALL RIGHTS RESERVED. NO DATA WITHOUT PERMISSION.
+                 </p>
+              </div>
+            </section>
+          </div>
+        );
       default:
         return (
           <div className="flex flex-col items-center justify-center py-20 text-center space-y-6">
