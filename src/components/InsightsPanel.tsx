@@ -48,7 +48,11 @@ export const InsightsPanel: React.FC<InsightsPanelProps> = ({ insights, isLoadin
                       if (part.startsWith('**') && part.endsWith('**')) {
                         return <strong key={index} className="text-white font-bold">{part.slice(2, -2)}</strong>;
                       }
-                      return part;
+                      // Handle headers
+                      if (part.startsWith('### ')) return <span key={index} className="text-[10px] font-black text-amber-500 uppercase tracking-widest block mb-1">{part.replace('### ', '')}</span>;
+                      if (part.startsWith('## ')) return <span key={index} className="text-sm font-bold text-white block mb-2">{part.replace('## ', '')}</span>;
+                      
+                      return part.replace(/^[-\-\•]\s*/, ''); // Remove bullet symbols from line start
                     })}
                   </p>
                 </div>

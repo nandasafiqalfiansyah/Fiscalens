@@ -245,23 +245,24 @@ export default function App() {
                      <h3 className="text-xs font-black uppercase tracking-[0.2em] text-white/40">AI Strategic Synthesis</h3>
                   </div>
                   <div className="p-8 flex-1">
-                     <div className="border-l-2 border-white/10 pl-6 space-y-6">
+                      <div className="border-l-2 border-white/10 pl-6 space-y-6">
                         {insights ? insights.split('\n').filter(l => l.trim()).map((line, i) => (
                           <div key={i}>
-                             <div className="text-[10px] text-amber-500/50 mb-1 font-mono uppercase tracking-tighter">Proposition_0{i+1}</div>
                              <p className="text-sm font-serif italic text-white/80 leading-relaxed">
                                 {line.split(/(\*\*.*?\*\*)/).map((part, index) => {
                                   if (part.startsWith('**') && part.endsWith('**')) {
                                     return <strong key={index} className="text-white font-bold not-italic">{part.slice(2, -2)}</strong>;
                                   }
-                                  return part;
+                                  if (part.startsWith('### ')) return <span key={index} className="text-[10px] font-black text-amber-500 uppercase tracking-widest block mb-1 not-italic font-sans">{part.replace('### ', '')}</span>;
+                                  
+                                  return part.replace(/^[-\-\•]\s*/, '');
                                 })}
                              </p>
                           </div>
                         )) : (
                           <p className="text-xs text-white/20 italic animate-pulse uppercase tracking-widest">Synthesizing final report...</p>
                         )}
-                     </div>
+                      </div>
                   </div>
                   <div className="bg-white text-black p-4 text-center cursor-pointer hover:bg-amber-500 transition-colors">
                      <span className="text-[10px] font-black uppercase tracking-[0.2em]">Deploy Institutional Report</span>
