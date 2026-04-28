@@ -1,0 +1,6 @@
+{
+  "name": "FISCALENS",
+  "description": "Real-time fiscal analytics dashboard evaluating government budget effectiveness against MSME growth and purchasing power using public datasets.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
